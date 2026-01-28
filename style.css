@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
 }
 
 .side_bar {
@@ -92,8 +92,73 @@
     margin-left: 220px;
     padding: 20px;
 }
+.home_cards{
+    display:flex ;
+    flex-direction: row;
+    gap: 5rem;
+    justify-content: center;
+    /* align-items: center; line ke wajah se heading same axis pe nahi aarahe the */
+    background-color: #BFD7EA;
+    width: auto;
+    padding: 20px;
+    border-radius:8px;
+    height: 52vh;
+    margin-left: 220px;
+}
+
+.home_cards_head{
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+    background-color:#a8c5db;
+    padding:15px;
+    border-radius:8px;
+    font-size: 1.5rem;
+    width: 230px;
+    margin-top: 6px;
+}
+.activity-list,.homecardtext{
+    justify-content: center;
+    /* background-color: #BFD7EA; */
+    /* width: auto; */
+    padding: 20px;
+    margin-top:0.5rem;
+    gap: 1rem;
+    
+    
+    
+}
+
+.homecardtext1{
+    padding:7px;
+    font-size:1.20rem
+}
+.homecardtext1{
+    text-decoration: none;
+}
+.plus{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #486581;
+    color:white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight:bold;
+    font-size:16px;
+}
 
 
+.homecard1,.homecard2,.homecard3{
+    background-color: #8FAFB3;
+    width: 500px;
+    border-radius:8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* Dashboard styles */
 .D1 {
     display: flex;
@@ -437,6 +502,9 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    /* width: 200%; */
+    /* max-width: 1200px; */
+    
     background-color: #a8c5db;
 }
 #loginbtn{
@@ -607,7 +675,7 @@
 #date,
 #description,
 #amount,
-#category {
+#type {
     padding: 5px;
     width: 140px;
 }
@@ -630,4 +698,96 @@
     align-items: center;
     text-align: center;
     
+}
+
+
+
+/* ===============================
+   📱 MOBILE RESPONSIVE FIXES
+   =============================== */
+
+@media (max-width: 768px) {
+
+  /* 1. Sidebar becomes top bar */
+  .side_bar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
+
+  /* 2. Remove left margins everywhere */
+  .main_content,
+  .D1,
+  .summary_cards,
+  .sum_head_edit,
+  .transactions_section,
+  .report_section,
+  .profile_main,
+  .logout_main,
+  .edit_main {
+    margin-left: 0;
+  }
+
+  /* 3. Buttons take full width */
+  .btn,
+  .btn1,
+  .def_btn {
+    width: 100%;
+    transform: none;
+  }
+
+  /* 4. Dashboard cards stack vertically */
+  .summary_cards {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    height: auto;
+    margin-top: 1rem;
+  }
+
+  /* 5. Forms stack vertically */
+  .expense-form,
+  .external,
+  .def_class {
+    flex-direction: column;
+    padding-left: 20px;
+  }
+
+  /* 6. Inputs become full-width */
+  #date,
+  #description,
+  #amount,
+  #category,
+  .form-input {
+    width: 100%;
+  }
+
+  /* 7. Logout buttons stack */
+  .logout_buttons {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* 8. Login container fix */
+  .login-container {
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+  }
+
+  /* 9. Remove fixed viewport heights */
+  .overall,
+  .report_section,
+  .profile_main {
+    height: auto;
+    min-height: 100vh;
+  }
+
 }
