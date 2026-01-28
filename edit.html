@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit window</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="side_bar">
+        <div class="main_name">
+            <h2>Expense Tracker</h2>
+            <span><input type="datetime-local" name="datetime" id="dandt"></span>
+        </div>
+        <span><img src="" alt=""></span>
+        <nav class="nav_links">
+            <a href="Skeleton.html" class="btn">Home</a>
+            <a href="Dashboard.html" class="btn">Dashboard</a>
+            <a href="transactions.html" class="btn">Transactions</a>
+            <a href="reports.html" class="btn">Reports</a>
+
+        </nav>
+        <div class="Profile">
+            <img src="" alt=""><a href="profile.html" class="btn">Profile</a>
+            <a href="logout.html" class="btn">Logout</a>
+        </div>
+    </aside>
+
+    <section class="edit_main">
+        <h2>Edit Profile</h2>
+        <form id="edit_form" class="form-input">
+            <input type="text" id="name1" placeholder="Full Name" required>
+            <input type="email" id="email1" placeholder="Email" required>
+            <input type="password" id="password" placeholder="New Password" required>
+            <input type="number" id="monthly_budget" placeholder="Monthly Budget" required>
+            <button type="submit" class="btn">Save Changes</button>
+            
+        </form>
+</body>
+</html>
