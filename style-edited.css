@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 :root {
@@ -21,19 +21,22 @@
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+
+
 body {
     background-color: var(--bg-lighter);
     color: var(--text-dark);
 }
 
+/* ==================== SIDEBAR ==================== */
 .side_bar {
-    width: 230px;
+    width: 260px;
     height: 100vh;
     background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
     color: white;
     display: flex;
     flex-direction: column;
-    padding: 15px 0;
+    padding: 25px 0;
     position: fixed;
     left: 0;
     top: 0;
@@ -45,25 +48,35 @@ body {
 
 .nav_links {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-direction: column;
-    margin-top: 1.5rem;
-    text-decoration: none;
-    padding: 15px;
+    margin: 20px 0;
+    padding: 0 15px;
 }
 
 .main_name {
     display: flex;
     flex-direction: column;
-    padding: 15px;
+    padding: 15px 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.main_name h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .Profile {
     display: flex;
-    gap: 1rem;
-    padding: 15px;
+    gap: 0.75rem;
+    padding: 15px 20px;
+    align-items: flex-start;
     flex-direction: column;
-
+    margin-top: auto;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
 }
 
 
@@ -71,84 +84,77 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 7px;
-    font-size: small;
-    color: rgb(168, 197, 219);
+    padding: 10px;
+    font-size: 0.85rem;
+    color: #bdc3c7;
     background-color: rgba(255, 255, 255, 0.1);
-    ;
     margin-top: 10px;
+    border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: medium;
-    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
     background-color: rgba(255, 255, 255, 0.1);
-    ;
-    width: 200px;
-    padding: 12px;
-    text-align: center;
+    width: 100%;
+    padding: 12px 15px;
+    text-align: left;
     text-decoration: none;
     text-transform: capitalize;
-    color: #E3EDF6;
-    border-radius: 5px;
+    color: #ecf0f1;
+    border-radius: 8px;
+    border: 1px solid transparent;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    transition-property: all;
+    transition: all 0.3s ease;
 }
 
 .btn:hover,
 .btn:focus,
 .btn:active {
+    background-color: var(--secondary-color);
+    transform: translateX(5px);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
-.btn3 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: medium;
-    font-weight: bold;
-    background-color: rgba(0, 142, 251, 0.415);;
-    width: 200px;
-    padding: 12px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: capitalize;
-    color: #001120;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    transition-property: all;
-}
-.btn3:hover,
-.btn3:focus,
-.btn3:active {
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
-.main_content {
-    margin-left: 220px;
-    padding: 20px;
 }
 
+.main_content {
+    margin-left: 260px;
+    padding: 40px;
+}
 .home_cards {
     display: flex;
     flex-direction: row;
     gap: 15px;
     justify-content: center;
-    /* align-items: center; line ke wajah se heading same axis pe nahi aarahe the */
+    flex-wrap: wrap;
     background-color: transparent;
     width: auto;
     padding: 30px 20px;
     border-radius: 0;
     height: auto;
-    margin-left: 230px;
+    margin-left: 260px;
+}
+
+/* ==================== CARD STYLES ==================== */
+.homecard1, .homecard2, .homecard3 {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 260px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.homecard1:hover, .homecard2:hover, .homecard3:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
 }
 
 .home_cards_head {
@@ -156,17 +162,17 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: 14px;
-    border-radius: 0px;
+    border-radius: 0;
     font-size: 1rem;
     width: 100%;
     font-weight: 600;
-    color: #2c3e50;
+    color: white;
+    margin: 0;
 }
 
-.activity-list,
-.homecardtext {
+.activity-list, .homecardtext {
     justify-content: flex-start;
     padding: 15px;
     margin-top: 0;
@@ -208,7 +214,7 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
     color: white;
     display: inline-flex;
     align-items: center;
@@ -223,32 +229,7 @@ body {
     transform: scale(1.15);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
 }
-
-.homecard1,
-.homecard2,
-.homecard3 {
-    background-color: var(--card-bg);
-    width: 100%;
-    max-width: 260px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0;
-    box-shadow: var(--shadow-md);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.homecard1:hover,
-.homecard2:hover,
-.homecard3:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-/* Dashboard styles */
+/* ==================== DASHBOARD STYLES ==================== */
 .D1 {
     display: flex;
     gap: 30px;
@@ -257,7 +238,7 @@ body {
     min-height: 100vh;
     text-decoration: none;
     justify-content: flex-start;
-    margin-left: 230px;
+    margin-left: 260px;
     padding: 40px;
 }
 
@@ -284,6 +265,7 @@ body {
 .recenttrans {
     display: flex;
     flex-direction: column;
+    margin-top: 0;
     background-color: var(--card-bg);
     padding: 30px;
     border-radius: 12px;
@@ -291,6 +273,7 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
+    margin-bottom: 0;
     border: 1px solid var(--border-color);
 }
 
@@ -322,11 +305,12 @@ body {
     flex-direction: row;
     background-color: var(--bg-lighter);
     height: auto;
-    min-height: 10vh;
+    min-height: 100vh;
     text-decoration: none;
     justify-content: center;
-    margin-left: 230px;
+    margin-left: 260px;
     padding: 40px;
+    flex-wrap: wrap;
     align-items: flex-start;
 }
 
@@ -432,6 +416,14 @@ body {
     border: 1px solid var(--border-color);
 }
 
+.expense_form_insights {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .expense-table {
     margin-top: 30px;
     background-color: var(--card-bg);
@@ -443,6 +435,8 @@ body {
     height: auto;
     border: 1px solid var(--border-color);
 }
+
+expense-table thead
 
 .expense-table th {
     padding: 15px;
@@ -465,7 +459,7 @@ body {
 
 .overall {
     background-color: var(--bg-lighter);
-    HEIGHT: 10vh;
+    min-height: 100vh;
 }
 
 .report_section {
@@ -555,7 +549,6 @@ body {
     margin-top: 0;
     border: 1px solid var(--border-color);
     flex-wrap: wrap;
-    color: #000000;
 }
 
 .app_preference {
@@ -615,7 +608,7 @@ body {
     text-decoration: none;
     font-weight: 700;
     border-radius: 8px;
-    background: linear-gradient(135deg, var(--accent-color) 0%, #c0392b 100%);
+    background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
     justify-content: center;
     align-items: center;
     width: auto;
@@ -632,8 +625,8 @@ body {
 }
 
 .btn_cancel {
-    background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
     color: white;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #c0392b 100%);
     padding: 15px 30px;
     text-decoration: none;
     font-weight: 700;
@@ -647,17 +640,13 @@ body {
     transition: all 0.3s ease;
     font-size: 1rem;
 }
+
 .btn_cancel:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(231, 76, 60, 0.3);
 }
 
-.login-remeber {
-    flex-direction: row;
-    display: flex;
-    gap: 1rem;
-}
-
+/* ==================== LOGIN PAGE ==================== */
 .login-container {
     display: flex;
     flex-direction: column;
@@ -668,7 +657,45 @@ body {
     padding: 20px;
 }
 
-#loginbtn,.btn2 {
+.login-headding {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, white 0%, #ecf0f1 100%);
+    padding: 25px 40px;
+    border-radius: 12px;
+    color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+
+.form-input {
+    padding: 20px;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-md);
+}
+
+#email, #password, #monthly_budget, #email1, #name1 {
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+#email:focus, #password:focus, #monthly_budget:focus, #email1:focus, #name1:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+#loginbtn {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
     font-weight: 700;
@@ -689,18 +716,12 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-
 }
 
-#loginbtn:hover,
-#loginbtn:focus,
-#loginbtn:active,
-.btn2:hover,
-.btn2:focus,.btn2:active {
-     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);;
+#loginbtn:hover, #loginbtn:focus, #loginbtn:active {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
-
 
 .external {
     display: flex;
@@ -710,47 +731,6 @@ body {
     padding: 0;
     flex-wrap: wrap;
     justify-content: center;
-
-}
-
-.form-input {
-    padding: 20px;
-    width: 100%;
-    max-width: 380px;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    outline: none;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background-color: var(--card-bg);
-    box-shadow: var(--shadow-md);
-}
-
-#email,
-#password,
-#monthly_budget,
-#email1,
-#name1 {
-    padding: 12px 15px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-}
-#email:focus, #password:focus, #monthly_budget:focus, #email1:focus, #name1:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-}
-.login-headding {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 40px;
-    background: linear-gradient(135deg, white 0%, #ecf0f1 100%);
-    padding: 25px 40px;
-    border-radius: 12px;
-    color: var(--primary-color);
-    box-shadow: var(--shadow-lg);
 }
 
 .btn1 {
@@ -763,7 +743,7 @@ body {
     text-align: center;
     text-decoration: none;
     text-transform: capitalize;
-    color: rgb(255, 255, 255);
+    color: white;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
@@ -778,25 +758,10 @@ body {
 }
 
 .edit_main {
-       margin-left: 260px;
+    margin-left: 260px;
     padding: 40px;
     background-color: var(--bg-lighter);
     min-height: 100vh;
-}
-
-.form-input {
-    padding: 10px;
-    width: 400px;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    gap: 1rem;
-
-}
-
-#def_view {
-    display: flex;
-    flex-direction: row;
 }
 
 .def_btn {
@@ -815,12 +780,9 @@ body {
     cursor: pointer;
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
-
 }
 
-.def_btn:hover,
-.def_btn:focus,
-.def_btn:active {
+.def_btn:hover, .def_btn:focus, .def_btn:active {
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
 }
@@ -832,18 +794,7 @@ body {
     flex-wrap: wrap;
 }
 
-.expense_form_insights {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-#date,
-#description,
-#amount,
-#type {
+#date, #description, #amount, #type {
     padding: 10px 12px;
     width: auto;
     border: 2px solid var(--border-color);
@@ -851,10 +802,12 @@ body {
     font-size: 0.95rem;
     transition: all 0.3s ease;
 }
+
 #date:focus, #description:focus, #amount:focus, #type:focus {
     border-color: var(--secondary-color);
     box-shadow: 0 0 6px rgba(52, 152, 219, 0.2);
 }
+
 #addBtn {
     padding: 10px 20px;
     width: auto;
@@ -866,10 +819,12 @@ body {
     font-weight: 700;
     transition: all 0.3s ease;
 }
+
 #addBtn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
 }
+
 #tableBody {
     font-size: 1.1rem;
     margin-bottom: 1rem;
@@ -882,8 +837,8 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
+/* ==================== HELPER LINKS ==================== */
 .summary-link, .transactions-link {
     text-decoration: none;
     color: inherit;
@@ -893,12 +848,7 @@ body {
     text-decoration: underline;
 }
 
-
-
-/* ===============================
-   📱 MOBILE RESPONSIVE FIXES
-   =============================== */
-
+/* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 768px) {
     /* Sidebar to horizontal navigation */
     .side_bar {
@@ -933,7 +883,7 @@ body {
         border-top: none;
         padding: 0 15px;
         flex-direction: row;
-        margin-top: 10px;
+        margin-top: 0;
         gap: 0.5rem;
     }
 
