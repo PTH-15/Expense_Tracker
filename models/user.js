@@ -1,0 +1,12 @@
+const mongoose = require('mongoose')
+mongoose.connect(`mongodb://127.0.0.1:27017/Expense_Tracker`)
+
+
+const User = mongoose.Schema({
+    name:{type :String,required:true},
+    email:{type :String,required:true},
+    password:{type :String,required:true},
+})
+
+
+module.exports = mongoose.model("User",User)

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flo — Edit Transaction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --bg:#0e0f11; --surface:#16181c; --surface-2:#1e2026;
+      --border:rgba(255,255,255,.07); --border-hover:rgba(255,255,255,.14);
+      --border-focus:rgba(124,110,245,.6);
+      --text:#f0f0ee; --muted:#7a7c82;
+      --accent:#7c6ef5; --accent-glow:rgba(124,110,245,.15);
+      --green:#3ecf8e; --green-glow:rgba(62,207,142,.12);
+      --red:#f26c6c; --red-glow:rgba(242,108,108,.12);
+      --radius:14px;
+    }
+
+    body {
+      font-family:'Inter', sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.25rem 2rem;
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0;
+      background:rgba(14,15,17,.88);
+      backdrop-filter:blur(14px);
+      z-index:100;
+    }
+    .logo { font-family:'Syne', sans-serif; font-size:1.35rem; font-weight:800; letter-spacing:-.5px; text-decoration:none; color:var(--text); }
+    .logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:.25rem; list-style:none; }
+    .nav-links a { text-decoration:none; color:var(--muted); font-size:.875rem; font-weight:500; padding:.45rem .85rem; border-radius:8px; transition:.15s; }
+    .nav-links a:hover { color:var(--text); background:var(--surface); }
+    .nav-links a.active { color:var(--text); background:var(--surface-2); }
+    .btn { font-size:.875rem; font-weight:500; padding:.5rem 1.1rem; border-radius:8px; border:none; cursor:pointer; text-decoration:none; transition:.15s; font-family:'Inter',sans-serif; }
+    .btn-ghost { background:transparent; color:var(--muted); border:1px solid var(--border); }
+    .btn-ghost:hover { color:var(--text); border-color:var(--border-hover); background:var(--surface); }
+
+    /* PAGE */
+    .page-wrap { max-width:620px; margin:0 auto; padding:2.5rem 2rem; }
+
+    .back-link {
+      display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; color:var(--muted);
+      text-decoration:none; margin-bottom:1.5rem; transition:.15s;
+    }
+    .back-link:hover { color:var(--text); }
+
+    .page-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem; }
+    .page-header h1 { font-family:'Syne', sans-serif; font-size:1.65rem; font-weight:800; letter-spacing:-.5px; }
+    .meta-tag { font-size:.78rem; color:var(--muted); background:var(--surface); border:1px solid var(--border); padding:.35rem .8rem; border-radius:999px; }
+
+    /* CARD */
+    .form-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      padding:1.75rem;
+    }
+
+    .type-toggle { display:flex; gap:.5rem; margin-bottom:1.4rem; background:var(--surface-2); padding:.3rem; border-radius:10px; border:1px solid var(--border); }
+    .type-toggle input { display:none; }
+    .type-toggle label {
+      flex:1; text-align:center; padding:.6rem; border-radius:7px; font-size:.875rem; font-weight:600;
+      cursor:pointer; color:var(--muted); transition:.15s;
+    }
+    .type-toggle input:checked + label.income-label { background:var(--green-glow); color:var(--green); }
+    .type-toggle input:checked + label.expense-label { background:var(--red-glow); color:var(--red); }
+
+    .field { margin-bottom:1.1rem; }
+    .field label { display:block; font-size:.8rem; font-weight:500; color:var(--muted); margin-bottom:.45rem; }
+    .field input, .field select, .field textarea {
+      width:100%; background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+      padding:.75rem 1rem; font-size:.9rem; color:var(--text); outline:none; font-family:'Inter',sans-serif;
+      transition:.15s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color:var(--border-focus); box-shadow:0 0 0 3px var(--accent-glow);
+    }
+    .field textarea { resize:vertical; min-height:80px; }
+
+    .field-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; }
+    @media (max-width:480px){ .field-row-2{ grid-template-columns:1fr; } }
+
+    .amount-wrap { position:relative; }
+    .amount-wrap .currency { position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--muted); font-size:.9rem; }
+    .amount-wrap input { padding-left:1.9rem; }
+
+    /* ACTION ROW */
+    .action-row { display:flex; gap:.75rem; margin-top:1.5rem; }
+    .btn-save {
+      flex:1; padding:.85rem; background:var(--accent); color:#fff; border:none; border-radius:10px;
+      font-size:.9rem; font-weight:600; cursor:pointer; transition:.15s; font-family:'Inter',sans-serif;
+    }
+    .btn-save:hover { background:#6a5ee0; transform:translateY(-1px); }
+
+    .btn-delete {
+      padding:.85rem 1.2rem; background:transparent; color:var(--red); border:1px solid rgba(242,108,108,.3);
+      border-radius:10px; font-size:.9rem; font-weight:600; cursor:pointer; transition:.15s; font-family:'Inter',sans-serif;
+      display:flex; align-items:center; gap:.4rem;
+    }
+    .btn-delete:hover { background:var(--red-glow); border-color:var(--red); }
+
+    /* DELETE CONFIRM MODAL */
+    .modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
+      display:none; align-items:center; justify-content:center; z-index:1000; padding:1.5rem;
+    }
+    .modal-overlay.open { display:flex; }
+    .confirm-box {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      width:100%; max-width:380px; padding:1.75rem; text-align:center;
+      animation:modalIn .18s ease;
+    }
+    @keyframes modalIn { from{ opacity:0; transform:translateY(10px) scale(.98);} to{ opacity:1; transform:translateY(0) scale(1);} }
+    .confirm-box .icon { font-size:2.25rem; margin-bottom:.75rem; }
+    .confirm-box h3 { font-family:'Syne', sans-serif; font-size:1.15rem; font-weight:700; margin-bottom:.5rem; }
+    .confirm-box p { font-size:.85rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+    .confirm-actions { display:flex; gap:.6rem; }
+    .confirm-actions button, .confirm-actions a {
+      flex:1; padding:.7rem; border-radius:9px; font-size:.85rem; font-weight:600; cursor:pointer;
+      border:none; text-decoration:none; transition:.15s; font-family:'Inter',sans-serif;
+    }
+    .confirm-cancel { background:var(--surface-2); color:var(--text); border:1px solid var(--border) !important; }
+    .confirm-cancel:hover { border-color:var(--border-hover) !important; }
+    .confirm-delete { background:var(--red); color:#fff; display:block; }
+    .confirm-delete:hover { background:#e05656; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">fl<span>o</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/transaction" class="active">Transactions</a></li>
+      <li><a href="/reports">Reports</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+    <a href="/logout" class="btn btn-ghost">Log out</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <a href="/transaction" class="back-link">← Back to transactions</a>
+
+    <div class="page-header">
+      <h1>Edit transaction</h1>
+      <span class="meta-tag">Added <%= new Date(transaction.createdAt || transaction.date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) %></span>
+    </div>
+
+    <div class="form-card">
+      <form action="/transaction/edit/<%= transaction.id %>" method="POST">
+
+        <div class="type-toggle">
+          <input type="radio" id="type-expense" name="type" value="expense" <%= transaction.type === 'expense' ? 'checked' : '' %> />
+          <label for="type-expense" class="expense-label">− Expense</label>
+          <input type="radio" id="type-income" name="type" value="income" <%= transaction.type === 'income' ? 'checked' : '' %> />
+          <label for="type-income" class="income-label">+ Income</label>
+        </div>
+
+        <div class="field">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" value="<%= transaction.title %>" required />
+        </div>
+
+        <div class="field-row-2">
+          <div class="field">
+            <label for="amount">Amount</label>
+            <div class="amount-wrap">
+              <span class="currency">₹</span>
+              <input type="number" id="amount" name="amount" value="<%= transaction.amount %>" min="0" step="0.01" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" value="<%= new Date(transaction.date).toISOString().split('T')[0] %>" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
+            <% ['Food','Shopping','Travel','Bills','Entertainment','Education','Health','Salary','Freelance','Other'].forEach(cat => { %>
+              <option value="<%= cat %>" <%= transaction.category === cat ? 'selected' : '' %>><%= cat %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="description">Description <span style="color:var(--muted); font-weight:400;">(optional)</span></label>
+          <textarea id="description" name="description"><%= transaction.description || '' %></textarea>
+        </div>
+
+        <div class="action-row">
+          <button type="submit" class="btn-save">Save changes</button>
+          <button type="button" class="btn-delete" onclick="openConfirm()">🗑️ Delete</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- DELETE CONFIRM -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="confirm-box">
+      <div class="icon">⚠️</div>
+      <h3>Delete this transaction?</h3>
+      <p>This action can't be undone. "<%= transaction.title %>" will be permanently removed.</p>
+      <div class="confirm-actions">
+        <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
+        <form action="/transaction/delete/<%= transaction.id %>" method="POST" style="flex:1;">
+          <button type="submit" class="confirm-delete" style="width:100%;">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const confirmModal = document.getElementById('confirmModal');
+    function openConfirm() { confirmModal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeConfirm() { confirmModal.classList.remove('open'); document.body.style.overflow = ''; }
+    confirmModal.addEventListener('click', (e) => { if (e.target === confirmModal) closeConfirm(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeConfirm(); });
+  </script>
+
+</body>
+</html>
+ 
