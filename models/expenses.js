@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// mongoose.connect(`mongodb://127.0.0.1:27017/Expense_Tracker`)
+
 
 const Expenses = mongoose.Schema({
     title:{type :String,required:true},

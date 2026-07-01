@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const mongoose = require('mongoose')
-mongoose.connect(`mongodb://127.0.0.1:27017/Expense_Tracker`)
+mongoose.connect("mongodb://frprathamm4_db_user:dZnMwij8zA2JzWBy@ac-3ghabta-shard-00-00.t0yyv1q.mongodb.net:27017,ac-3ghabta-shard-00-01.t0yyv1q.mongodb.net:27017,ac-3ghabta-shard-00-02.t0yyv1q.mongodb.net:27017/Expense_Tracker?ssl=true&replicaSet=atlas-l7007g-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0")// mongoose.connect("mongodb+srv://frprathamm4_db_user:dZnMwij8zA2JzWBy@cluster0.t0yyv1q.mongodb.net/expenseTracker?appName=Cluster0")
 const User = require("./models/user")
 const Expenses = require("./models/expenses")
 const { register } = require('module')
@@ -63,7 +63,7 @@ app.get("/delete/:email",async(req,res)=>{
 })
 
 app.get("/transaction",async (req,res)=>{
-    console.log(req.query)
+    // console.log(req.query)
     let query = {}
     if (req.query.type){
         query.type= req.query.type
@@ -94,11 +94,20 @@ app.get("/transaction",async (req,res)=>{
         transaction = transaction.sort({ amount: 1 });
     }
     transaction = await transaction
+    const income = transaction.filter(val => val.type === "income")
+    const totalIncome = income.reduce((sum,val)=>{return sum+val.amount},0)
+    const expense = transaction.filter(val => val.type === "expense")
+    const totalExpense = expense.reduce((sum,val)=>{return sum+val.amount},0)
+    const netSaving = totalIncome - totalExpense
     res.render("transaction",{transaction,
         categoryVal: req.query.category,
         typeVal: req.query.type,
         sortVal: req.query.sort,
-        searchVal: req.query.search})
+        searchVal: req.query.search,
+        totalIncome,
+        totalExpense
+
+    })
 })
 app.post("/transaction/add",async (req,res)=>{
     const newexpense = await Expenses.create(req.body)
@@ -106,4 +115,24 @@ app.post("/transaction/add",async (req,res)=>{
 })
 
 
+app.get("/transaction/edit/:id",async (req,res)=>{
+    const id = req.params.id
+    const transaction = await Expenses.findById(id)
+    res.render("edit-transaction",{transaction})
+})
+
+app.post("/transaction/edit/:id", async (req,res)=>{
+    const id = req.params.id
+    await Expenses.findByIdAndUpdate(id , req.body)
+    res.redirect("/transaction")
+})
+
+app.post("/transaction/delete/:id",async (req,res)=>{
+    const id = req.params.id
+    const transaction = await Expenses.findByIdAndDelete(id)
+    if(!transaction){
+        return res.redirect("/transaction")
+    }
+    res.redirect("/transaction")
+})
 app.listen(3000)

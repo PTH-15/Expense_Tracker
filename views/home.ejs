@@ -760,7 +760,7 @@
                     </div>
                     <div class="bar-track">
                         <div class="bar-fill" 
-                        style="width: <%= Math.min(locals.budgetUsedPct || 0, 100) %>%;"></div>
+                        style=`width: <%= Math.min(locals.budgetUsedPct || 0, 100) %>%;`></div>
                     </div>
                     <div class="budget-bar-footer">
                         <span>₹<%= (locals.totalExpense || 0).toLocaleString('en-IN') %> spent</span>

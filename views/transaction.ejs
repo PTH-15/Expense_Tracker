@@ -313,7 +313,7 @@
       </select>
       <select name="category" onchange="this.form.submit()">
         <option value="">All categories</option>
-        <% ['Food','Shopping','Travel','Bills','Entertainment','Education','Health','Salary','Freelance','Other'].forEach(cat => { %>
+        <% ['Food','Shopping','Travel','Bills','Entertainment','Education','Health','Salary','Freelance','Fuel','Other'].forEach(cat => { %>
           <option value="<%= cat %>" <%= locals.categoryVal === cat ? 'selected' : '' %>><%= cat %></option>
         <% }) %>
       </select>
