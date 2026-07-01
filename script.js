@@ -4,6 +4,8 @@ const path = require('path')
 const mongoose = require('mongoose')
 require("dotenv").config()
 mongoose.connect(process.env.MONGO_URL)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB Error:", err));
 const User = require("./models/user")
 const Expenses = require("./models/expenses")
 const { register } = require('module')
